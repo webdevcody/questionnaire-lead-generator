@@ -1,8 +1,9 @@
 {
   "name": "questionnaire-lead-generator",
   "scripts": {
-    "dev": "npm-run-all --parallel server tailwind",
+    "dev": "npm-run-all --parallel server tailwind livereload",
     "server": "bun run --hot src/index.tsx",
+    "livereload": "livereload -d -e 'tsx' ./src",
     "tailwind": "tailwindcss -i src/input.css -o static/output.css --watch",
     "db:push": "drizzle-kit push --config=drizzle.config.ts",
     "db:migrate": "node -r esbuild-register ./src/db/migrate.ts",
@@ -11,13 +12,14 @@
   },
   "dependencies": {
     "@libsql/client": "^0.7.0",
-    "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.23.0",
     "drizzle-orm": "^0.32.0",
     "hono": "^4.4.12",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.23.0",
+    "livereload": "^0.9.3",
     "npm-run-all": "^4.1.5",
     "@eslint/js": "^9.6.0",
     "@types/bun": "latest",
