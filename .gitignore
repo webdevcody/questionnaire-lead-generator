@@ -1,3 +1,5 @@
 # deps
 node_modules/
-src/output.css
+static/output.css
+.env
+local.db
