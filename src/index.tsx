@@ -2,7 +2,13 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Layout } from "./layout";
-import { register } from "./pages";
+import { registerHome } from "./pages";
+
+declare module "hono" {
+  interface ContextRenderer {
+    (content: string | Promise<string>, props?: { title: string }): Response;
+  }
+}
 
 const app = new Hono();
 
@@ -10,10 +16,15 @@ app.use("/static/*", serveStatic({ root: "./" }));
 
 app.get(
   "*",
-  jsxRenderer(({ children }) => <Layout>{children}</Layout>, { stream: true })
+  jsxRenderer(
+    ({ children, title }) => <Layout title={title}>{children}</Layout>,
+    {
+      stream: true,
+    }
+  )
 );
 
-register(app);
+registerHome(app);
 
 export type App = typeof app;
 
