@@ -15,11 +15,14 @@
   "dependencies": {
     "@libsql/client": "^0.7.0",
     "@types/lodash": "^4.17.6",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.32.0",
     "hono": "^4.4.12",
     "i": "^0.3.7",
     "lodash": "^4.17.21",
     "npm": "^10.8.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tailwind-merge": "^2.4.0",
     "typescript": "^5.5.3"
   },
   "devDependencies": {

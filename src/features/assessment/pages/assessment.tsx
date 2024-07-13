@@ -12,7 +12,7 @@ export function registerAssessmentQuestions(app: App) {
     const answerIdx = formData.get("answerIdx") as string;
     const questionId = formData.get("questionId") as string;
     const questionIdx = assessmentQuestions.findIndex(
-      (q) => q.id === questionId
+      (q) => q.id === questionId,
     );
     await saveResponse(c, { questionId, userAnswerIdx: answerIdx });
     if (questionIdx === assessmentQuestions.length - 1) {
@@ -28,42 +28,53 @@ export function registerAssessmentQuestions(app: App) {
     const question = assessmentQuestions[questionIdx];
 
     return c.render(
-      <div className="container max-w-xl mx-auto min-h-screen">
+      <div className="container mx-auto min-h-screen max-w-xl">
         <div class="space-y-8">
           <Steps current={2} />
 
-          <h1 class="text-center text-4xl">
+          <h1 class="text-center text-xl">
             Question {questionIdx + 1} of {assessmentQuestions.length}
           </h1>
 
-          <p class="text-center text-2xl">{startCase(question.category)}</p>
+          <p class="text-center text-xl">{startCase(question.category)}</p>
 
-          <form action={saveResponseUrl} method="POST">
+          <form action={saveResponseUrl} method="POST" class={"space-y-16"}>
             <input type="hidden" name="questionId" value={question.id} />
 
-            <div className="max-w-xl">
-              <div class="space-y-16">
-                <ul class="space-y-4">
-                  {question.answers.map((answer, idx) => (
-                    <li class="flex gap-2">
+            <div className="max-w-xl space-y-8">
+              <p class={"text-xl"}>{question.question}</p>
+
+              <div class="flex items-center">
+                <label for="rating" class="">
+                  Strongly Disagree
+                </label>
+
+                <div className="mx-12 flex flex-1 justify-between">
+                  {new Array(5).fill(0).map((_, idx) => (
+                    <label for={`option-${idx}`} class="relative">
+                      <span class="absolute -bottom-6 right-2">{idx + 1}</span>
                       <input
-                        id={answer}
+                        required
                         type="radio"
-                        required={true}
+                        id={`option-${idx}`}
                         name="answerIdx"
                         value={idx.toString()}
                         checked={
                           responses.questions[question.id] === idx.toString()
                         }
+                        class="radio"
                       />
-                      <label for={answer}>{answer}</label>
-                    </li>
+                    </label>
                   ))}
-                </ul>
+                </div>
+
+                <label for="rating" class="">
+                  Strongly Agree
+                </label>
               </div>
             </div>
 
-            <div className="flex gap-8 justify-center">
+            <div className="flex justify-center gap-8">
               {questionIdx === 0 && (
                 <div>
                   <a href={`/assessment/context`} class="btn btn-ghost">
@@ -112,7 +123,7 @@ export function registerAssessmentQuestions(app: App) {
       </div>,
       {
         title: "Podcast Assessment - Questions",
-      }
+      },
     );
   });
 }

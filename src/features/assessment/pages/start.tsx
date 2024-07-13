@@ -26,7 +26,7 @@ export function registerStartAssessment(app: App) {
     const responses = getResponses(c);
 
     return c.render(
-      <div className="container max-w-xl mx-auto">
+      <div className="container mx-auto max-w-xl">
         <div class="space-y-8">
           <Steps current={0} />
 
@@ -38,12 +38,7 @@ export function registerStartAssessment(app: App) {
           </p>
 
           <div className="max-w-xl">
-            <form
-              class="space-y-8"
-              method="POST"
-              action={updateInfoUrl}
-              hx-swap=""
-            >
+            <form class="space-y-8" method="POST" action={updateInfoUrl}>
               <div>
                 <span>1. What's your name?*</span>
                 <div className="flex gap-8">
@@ -118,7 +113,7 @@ export function registerStartAssessment(app: App) {
       </div>,
       {
         title: "Podcast Assessment - Start",
-      }
+      },
     );
   });
 }

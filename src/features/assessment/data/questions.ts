@@ -59,92 +59,21 @@ export const backgroundQuestions = [
 export const assessmentQuestions = [
   {
     question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
     category: "leadership",
   },
   {
     question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "leadership",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "leadership",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "leadership",
-  },
-  // marketing questions
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
     category: "marketing",
   },
   {
     question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "marketing",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "marketing",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "marketing",
-  },
-  // sales
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "sales",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "sales",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
-    section: "assessment",
-    category: "sales",
-  },
-  {
-    question: "How long have you been in your current role?",
-    type: "radio",
-    answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
     category: "sales",
   },
 ] as Question[];
 
 [...backgroundQuestions, ...assessmentQuestions].forEach(
-  (q, idx) => (q.id = (idx + 1).toString())
+  (q, idx) => (q.id = (idx + 1).toString()),
 );

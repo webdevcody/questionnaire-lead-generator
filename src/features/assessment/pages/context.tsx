@@ -1,5 +1,9 @@
 import { Question } from "../components/question";
-import { getResponses, saveResponse } from "../../../data/responses";
+import {
+  getResponses,
+  saveResponse,
+  updateResponse,
+} from "../../../data/responses";
 import { App } from "../../../server";
 import { backgroundQuestions } from "../data/questions";
 import { Steps } from "../components/layout";
@@ -9,9 +13,11 @@ export function registerContextAssessment(app: App) {
 
   app.post(saveContextUrl, async (c) => {
     const formData = await c.req.formData();
+    const responses = getResponses(c);
     formData.forEach((value, key) => {
-      saveResponse(c, { questionId: key, userAnswerIdx: value.toString() });
+      responses.questions[key] = value.toString();
     });
+    updateResponse(c, responses);
     return c.redirect("/assessment/questions/0");
   });
 
@@ -19,7 +25,7 @@ export function registerContextAssessment(app: App) {
     const responses = getResponses(c);
 
     return c.render(
-      <div className="container max-w-xl mx-auto">
+      <div className="container mx-auto max-w-xl">
         <div class="space-y-8">
           <Steps current={1} />
 
@@ -62,7 +68,7 @@ export function registerContextAssessment(app: App) {
       </div>,
       {
         title: "Podcast Assessment - Context",
-      }
+      },
     );
   });
 }
