@@ -17,6 +17,7 @@ RUN apt-get update -qq && \
 # Install node modules
 COPY --link bun.lockb package.json ./
 RUN bun install --ci
+RUN bun tailwind
 
 # Copy application code
 COPY --link . .
