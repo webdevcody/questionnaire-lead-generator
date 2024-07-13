@@ -6,6 +6,7 @@
     "server": "bun run --hot src/server.tsx",
     "livereload": "livereload -d -e 'tsx' ./src",
     "tailwind": "tailwindcss -i src/styles/input.css -o static/output.css --watch",
+    "build:tailwind": "tailwindcss -i src/styles/input.css -o static/output.css",
     "db:push": "drizzle-kit push --config=drizzle.config.ts",
     "db:migrate": "node -r esbuild-register ./src/db/migrate.ts",
     "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
