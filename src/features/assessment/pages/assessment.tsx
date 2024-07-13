@@ -1,13 +1,12 @@
 import { getResponses, saveResponse } from "../../../data/responses";
-import { App } from "../../../server";
 import { assessmentQuestions } from "../data/questions";
 import { Steps } from "../components/layout";
 import { startCase } from "lodash";
+import { actionFactory, pageFactory } from "../../../util/action";
 
-export const saveResponseUrl = "/actions/save-response";
-
-export function registerAssessmentQuestions(app: App) {
-  app.post(saveResponseUrl, async (c) => {
+export const registerSaveResponse = actionFactory(
+  "save-response",
+  async (c) => {
     const formData = await c.req.formData();
     const answerIdx = formData.get("answerIdx") as string;
     const questionId = formData.get("questionId") as string;
@@ -20,14 +19,17 @@ export function registerAssessmentQuestions(app: App) {
     } else {
       return c.redirect(`/assessment/questions/${questionIdx + 1}`);
     }
-  });
+  },
+);
 
-  app.get("/assessment/questions/:questionIdx", async (c) => {
+export const registerQuestionPage = pageFactory(
+  "/assessment/questions/:questionIdx",
+  async (c) => {
     const responses = getResponses(c);
     const questionIdx = parseInt(c.req.param().questionIdx, 10);
     const question = assessmentQuestions[questionIdx];
 
-    return c.render(
+    return (
       <div className="container mx-auto min-h-screen max-w-xl">
         <div class="space-y-8">
           <Steps current={2} />
@@ -38,7 +40,11 @@ export function registerAssessmentQuestions(app: App) {
 
           <p class="text-center text-xl">{startCase(question.category)}</p>
 
-          <form action={saveResponseUrl} method="POST" class={"space-y-16"}>
+          <form
+            action={registerSaveResponse.url}
+            method="POST"
+            class={"space-y-16"}
+          >
             <input type="hidden" name="questionId" value={question.id} />
 
             <div className="max-w-xl space-y-8">
@@ -120,10 +126,10 @@ export function registerAssessmentQuestions(app: App) {
             </div>
           </form>
         </div>
-      </div>,
-      {
-        title: "Podcast Assessment - Questions",
-      },
+      </div>
     );
-  });
-}
+  },
+  {
+    title: "Podcast Assessment - Questions",
+  },
+);

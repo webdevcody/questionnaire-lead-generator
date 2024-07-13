@@ -1,5 +1,5 @@
 import { getResponses } from "../../../data/responses";
-import { App } from "../../../server";
+import { pageFactory } from "../../../util/action";
 import { cn } from "../../../util/cn";
 import { assessmentQuestions, Categories } from "../data/questions";
 import { startCase } from "lodash";
@@ -59,8 +59,9 @@ function Category({
   );
 }
 
-export function registerResults(app: App) {
-  app.get("/assessment/results", async (c) => {
+export const registerResultsPage = pageFactory(
+  "/assessment/results",
+  async (c) => {
     const responses = getResponses(c);
 
     // filter out the responses.questions by type
@@ -75,7 +76,7 @@ export function registerResults(app: App) {
         return acc;
       }, {});
 
-    return c.render(
+    return (
       <div className="container mx-auto min-h-screen max-w-2xl">
         <div class="space-y-8">
           <h1 class="text-4xl">Results</h1>
@@ -93,10 +94,10 @@ export function registerResults(app: App) {
           <Category category="marketing" score={categoryScores["marketing"]} />
           <Category category="sales" score={categoryScores["sales"]} />
         </div>
-      </div>,
-      {
-        title: "Results | Podcast Assessment",
-      },
+      </div>
     );
-  });
-}
+  },
+  {
+    title: "Results | Podcast Assessment",
+  },
+);

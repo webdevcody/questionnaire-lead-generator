@@ -1,31 +1,13 @@
 import { getResponses, updateResponse } from "../../../data/responses";
-import { App } from "../../../server";
+import { actionFactory, pageFactory } from "../../../util/action";
 import { Steps } from "../components/layout";
 
-export const updateInfoUrl = "/actions/update-info";
-
-export function registerStartAssessment(app: App) {
-  app.post(updateInfoUrl, async (c) => {
-    const formData = await c.req.formData();
-    const firstname = formData.get("firstname") as string;
-    const lastname = formData.get("lastname") as string;
-    const email = formData.get("email") as string;
-    const phone = formData.get("phone") as string;
-
-    const responses = getResponses(c);
-    responses.info.firstname = firstname;
-    responses.info.lastname = lastname;
-    responses.info.email = email;
-    responses.info.phone = phone;
-    updateResponse(c, responses);
-
-    return c.redirect("/assessment/context");
-  });
-
-  app.get("/assessment/start", async (c) => {
+export const registerStartPage = pageFactory(
+  "/assessment/start",
+  (c) => {
     const responses = getResponses(c);
 
-    return c.render(
+    return (
       <div className="container mx-auto max-w-xl">
         <div class="space-y-8">
           <Steps current={0} />
@@ -38,7 +20,11 @@ export function registerStartAssessment(app: App) {
           </p>
 
           <div className="max-w-xl">
-            <form class="space-y-8" method="POST" action={updateInfoUrl}>
+            <form
+              class="space-y-8"
+              method="POST"
+              action={registerUpdateInfo.url}
+            >
               <div>
                 <span>1. What's your name?*</span>
                 <div className="flex gap-8">
@@ -110,10 +96,27 @@ export function registerStartAssessment(app: App) {
             </form>
           </div>
         </div>
-      </div>,
-      {
-        title: "Podcast Assessment - Start",
-      },
+      </div>
     );
-  });
-}
+  },
+  {
+    title: "Podcast Assessment - Start",
+  },
+);
+
+export const registerUpdateInfo = actionFactory("update-info", async (c) => {
+  const formData = await c.req.formData();
+  const firstname = formData.get("firstname") as string;
+  const lastname = formData.get("lastname") as string;
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
+
+  const responses = getResponses(c);
+  responses.info.firstname = firstname;
+  responses.info.lastname = lastname;
+  responses.info.email = email;
+  responses.info.phone = phone;
+  updateResponse(c, responses);
+
+  return c.redirect("/assessment/context");
+});

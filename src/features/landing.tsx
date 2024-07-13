@@ -1,12 +1,9 @@
-// import { getCookie } from "hono/cookie";
-import { App } from "../server";
+import { pageFactory } from "../util/action";
 
-export function registerLanding(app: App) {
-  app.get("/", async (c) => {
-    // const responses = JSON.parse(getCookie(c, "responses") ?? "{}");
-    // const isSurveyInProgress = !!responses;
-
-    return c.render(
+export const registerLandingPage = pageFactory(
+  "/",
+  async (c) => {
+    return (
       <div class="space-y-4">
         <section class="py-12">
           <div class="container mx-auto max-w-2xl text-center">
@@ -15,7 +12,7 @@ export function registerLanding(app: App) {
               to be
               <span class="text-base-content"> great</span>
             </h1>
-            <p class="text-gray-400 mt-4 text-xl">
+            <p class="mt-4 text-xl text-gray-400">
               Our survey analyzes various aspects of your podcast to pinpoint
               areas for improvement. You'll receive a detailed PDF report with
               personalized insights and recommendations.
@@ -25,30 +22,30 @@ export function registerLanding(app: App) {
 
         <section class="py-12">
           <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div class="p-6 rounded-lg shadow-lg border-neutral-content border">
+            <div class="grid grid-cols-1 gap-6 text-center md:grid-cols-3">
+              <div class="rounded-lg border border-neutral-content p-6 shadow-lg">
                 <h3 class="text-xl font-bold text-base-content">
                   Identify Weaknesses
                 </h3>
-                <p class="text-neutral-content mt-2">
+                <p class="mt-2 text-neutral-content">
                   Understand where your podcast is falling short and how to
                   address it.
                 </p>
               </div>
-              <div class="p-6 rounded-lg shadow-lg border-neutral-content border">
+              <div class="rounded-lg border border-neutral-content p-6 shadow-lg">
                 <h3 class="text-xl font-bold text-base-content">
                   Customized Insights
                 </h3>
-                <p class="text-neutral-content mt-2">
+                <p class="mt-2 text-neutral-content">
                   Receive a tailored report specific to your podcast's unique
                   needs.
                 </p>
               </div>
-              <div class="p-6 rounded-lg shadow-lg border-neutral-content border">
+              <div class="rounded-lg border border-neutral-content p-6 shadow-lg">
                 <h3 class="text-xl font-bold text-base-content">
                   Actionable Recommendations
                 </h3>
-                <p class="text-neutral-content mt-2">
+                <p class="mt-2 text-neutral-content">
                   Get practical tips and strategies to enhance your podcast's
                   performance.
                 </p>
@@ -58,7 +55,7 @@ export function registerLanding(app: App) {
         </section>
 
         <section class="py-12">
-          <div class="container mx-auto text-center space-y-4">
+          <div class="container mx-auto space-y-4 text-center">
             <h2 class="text-2xl font-semibold">
               Ready to Improve Your Podcast?
             </h2>
@@ -71,10 +68,10 @@ export function registerLanding(app: App) {
             </a>
           </div>
         </section>
-      </div>,
-      {
-        title: "Podcast Performance Survey",
-      }
+      </div>
     );
-  });
-}
+  },
+  {
+    title: "Podcast Performance Survey",
+  },
+);

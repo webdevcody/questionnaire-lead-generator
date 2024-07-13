@@ -1,10 +1,11 @@
-import { App } from "../../../server";
+import { pageFactory } from "../../../util/action";
 import { Steps } from "../components/layout";
 
-export function registerFinishAssessment(app: App) {
-  app.get("/assessment/finish", async (c) => {
-    return c.render(
-      <div className="container max-w-xl mx-auto min-h-screen">
+export const registerFinishAssessmentPage = pageFactory(
+  "/assessment/finish",
+  (c) => {
+    return (
+      <div className="container mx-auto min-h-screen max-w-xl">
         <div class="space-y-8">
           <Steps current={3} />
 
@@ -28,10 +29,10 @@ export function registerFinishAssessment(app: App) {
             </div>
           </div>
         </div>
-      </div>,
-      {
-        title: "Finished | Podcast Assessment",
-      }
+      </div>
     );
-  });
-}
+  },
+  {
+    title: "Finished | Podcast Assessment",
+  },
+);
