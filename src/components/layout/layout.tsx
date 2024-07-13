@@ -10,7 +10,7 @@ export function Layout({
   title: string;
 }) {
   return (
-    <html data-theme="luxury">
+    <html data-theme="business">
       <head>
         <title>{title}</title>
         <script

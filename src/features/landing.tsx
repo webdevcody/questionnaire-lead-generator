@@ -30,7 +30,7 @@ export function registerLanding(app: App) {
                 <h3 class="text-xl font-bold text-base-content">
                   Identify Weaknesses
                 </h3>
-                <p class="text-accent-content mt-2">
+                <p class="text-neutral-content mt-2">
                   Understand where your podcast is falling short and how to
                   address it.
                 </p>
@@ -39,7 +39,7 @@ export function registerLanding(app: App) {
                 <h3 class="text-xl font-bold text-base-content">
                   Customized Insights
                 </h3>
-                <p class="text-accent-content mt-2">
+                <p class="text-neutral-content mt-2">
                   Receive a tailored report specific to your podcast's unique
                   needs.
                 </p>
@@ -48,7 +48,7 @@ export function registerLanding(app: App) {
                 <h3 class="text-xl font-bold text-base-content">
                   Actionable Recommendations
                 </h3>
-                <p class="text-accent-content mt-2">
+                <p class="text-neutral-content mt-2">
                   Get practical tips and strategies to enhance your podcast's
                   performance.
                 </p>
@@ -66,7 +66,7 @@ export function registerLanding(app: App) {
               Take our survey today and start your journey towards podcasting
               excellence.
             </p>
-            <a href="/start-assessment" class="btn btn-primary">
+            <a href="/assessment/start" class="btn btn-primary">
               Take the Survey
             </a>
           </div>

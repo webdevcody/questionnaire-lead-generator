@@ -1,7 +1,7 @@
 import { App } from "../../../server";
 
 export function registerFinishAssessment(app: App) {
-  app.get("/finish-assessment", async (c) => {
+  app.get("/assessment/finish", async (c) => {
     return c.render(
       <div className="container max-w-xl mx-auto min-h-screen py-12">
         <div class="space-y-8">

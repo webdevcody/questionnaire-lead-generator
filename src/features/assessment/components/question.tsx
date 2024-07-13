@@ -1,5 +1,5 @@
-import { saveResponseUrl } from "../actions/save-response";
 import { Question } from "../data/questions";
+import { saveResponseUrl } from "../pages/assessment";
 
 function Select({
   question,

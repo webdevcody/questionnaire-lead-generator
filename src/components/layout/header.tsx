@@ -1,6 +1,6 @@
 export function Header() {
   return (
-    <div className="navbar bg-base-100 border-b border-neutral-content">
+    <div className="navbar">
       <div className="container mx-auto">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl" href="/">
