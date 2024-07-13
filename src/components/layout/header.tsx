@@ -1,9 +1,11 @@
 export function Header() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 border-b border-neutral-content">
       <div className="container mx-auto">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Podcast Assessment</a>
+          <a className="btn btn-ghost text-xl" href="/">
+            Podcast Assessment
+          </a>
         </div>
         <div className="flex-none">
           <button className="btn btn-square btn-ghost">

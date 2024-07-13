@@ -3,9 +3,10 @@ import { serveStatic } from "hono/bun";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Layout } from "./components/layout/layout";
 import { registerLanding } from "./features/landing";
-import { registerStartAssessment } from "./features/assessment/start-assessment";
-import { registerFinishAssessment } from "./features/assessment/finish-assessment";
-import { registerAssessmentApi } from "./features/assessment/api";
+import { registerStartAssessment } from "./features/assessment/pages/start";
+import { registerFinishAssessment } from "./features/assessment/pages/finish";
+import { registerAssessment } from "./features/assessment/pages/assessment";
+import { registerAssessmentActions } from "./features/assessment/actions/save-response";
 
 declare module "hono" {
   interface ContextRenderer {
@@ -31,7 +32,8 @@ const features = [
   registerLanding,
   registerStartAssessment,
   registerFinishAssessment,
-  registerAssessmentApi,
+  registerAssessmentActions,
+  registerAssessment,
 ];
 
 features.forEach((register) => register(app));

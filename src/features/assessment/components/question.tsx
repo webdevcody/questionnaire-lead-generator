@@ -1,9 +1,5 @@
-export type Question = {
-  id: string;
-  question: string;
-  answers: string[];
-  type: "select" | "radio" | "multi";
-};
+import { saveResponseUrl } from "../actions/save-response";
+import { Question } from "../data/questions";
 
 function Select({
   question,
@@ -13,22 +9,28 @@ function Select({
   responses: Record<string, string>;
 }) {
   return (
-    <select
-      hx-post={`/api/responses/${question.id}`}
-      hx-trigger="change"
-      class="select w-full max-w-xs"
-      name="answerIdx"
-      // hx-include={`[data-name='${question.id}']`}
-    >
-      <option disabled selected>
-        Pick your favorite Simpson
-      </option>
-      {question.answers.map((answer, idx) => (
-        <option value={`${idx}`} selected={responses[question.id] === `${idx}`}>
-          {answer}
+    <>
+      <select
+        hx-post={saveResponseUrl}
+        hx-trigger="change"
+        class="select w-full max-w-xs select-bordered"
+        name="answerIdx"
+        hx-include={`next [name='questionId']`}
+      >
+        <option disabled selected>
+          Pick your favorite Simpson
         </option>
-      ))}
-    </select>
+        {question.answers.map((answer, idx) => (
+          <option
+            value={`${idx}`}
+            selected={responses[question.id] === `${idx}`}
+          >
+            {answer}
+          </option>
+        ))}
+      </select>
+      <input type="hidden" name="questionId" value={question.id} />
+    </>
   );
 }
 
@@ -41,22 +43,18 @@ function Radio({
 }) {
   return (
     <ul class="space-y-4">
+      <input type="hidden" name="questionId" value={question.id} />
       {question.answers.map((answer, idx) => (
         <li class="flex gap-2">
           <input
             id={answer}
             type="radio"
-            name={`${question.id}`}
-            hx-post={`/api/responses/${question.id}`}
+            name={"answerIdx"}
+            value={idx.toString()}
+            hx-post={saveResponseUrl}
             hx-trigger="click"
-            hx-include={`[data-name='${question.id}-${idx}']`}
+            hx-include={`previous [name='questionId']`}
             checked={responses[question.id] === idx.toString()}
-          />
-          <input
-            type="hidden"
-            name="answerIdx"
-            data-name={`${question.id}-${idx}`}
-            value={idx}
           />
           <label for={answer}>{answer}</label>
         </li>
