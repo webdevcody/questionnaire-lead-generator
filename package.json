@@ -1,6 +1,7 @@
 {
   "name": "questionnaire-lead-generator",
   "scripts": {
+    "start": "bun run src/server.tsx",
     "dev": "npm-run-all --parallel server tailwind livereload",
     "server": "bun run --hot src/server.tsx",
     "livereload": "livereload -d -e 'tsx' ./src",
