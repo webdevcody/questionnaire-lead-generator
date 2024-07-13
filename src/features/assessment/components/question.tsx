@@ -29,6 +29,7 @@ function Select({
           </option>
         ))}
       </select>
+
       <input type="hidden" name="questionId" value={question.id} />
     </>
   );
@@ -43,19 +44,31 @@ function Radio({
 }) {
   return (
     <ul class="space-y-4">
-      <input type="hidden" name="questionId" value={question.id} />
       {question.answers.map((answer, idx) => (
         <li class="flex gap-2">
           <input
             id={answer}
             type="radio"
-            name={"answerIdx"}
+            name={`${question.id}`}
             value={idx.toString()}
             hx-post={saveResponseUrl}
             hx-trigger="click"
-            hx-include={`previous [name='questionId']`}
+            hx-include={`[data-name='${question.id}-${idx}']`}
             checked={responses[question.id] === idx.toString()}
           />
+          <input
+            type="hidden"
+            name="answerIdx"
+            data-name={`${question.id}-${idx}`}
+            value={idx}
+          />
+          <input
+            data-name={`${question.id}-${idx}`}
+            type="hidden"
+            name="questionId"
+            value={question.id}
+          />
+
           <label for={answer}>{answer}</label>
         </li>
       ))}
