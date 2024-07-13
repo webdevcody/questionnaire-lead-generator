@@ -7,7 +7,6 @@ import { registerStartAssessment } from "./features/assessment/pages/start";
 import { registerFinishAssessment } from "./features/assessment/pages/finish";
 import { registerAssessment } from "./features/assessment/pages/assessment";
 import { registerAssessmentActions } from "./features/assessment/actions/save-response";
-import { cache } from "hono/cache";
 
 declare module "hono" {
   interface ContextRenderer {
@@ -19,10 +18,12 @@ const app = new Hono();
 
 app.use(
   "/static/*",
-  cache({
-    cacheName: "static",
-    cacheControl: "max-age=3600",
-  }),
+  async (c, next) => {
+    await next();
+    if (process.env.NODE_ENV === "production") {
+      c.res.headers.set("Cache-Control", "public, max-age=31536000");
+    }
+  },
   serveStatic({ root: "./" })
 );
 
