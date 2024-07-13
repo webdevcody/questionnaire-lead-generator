@@ -1,46 +1,41 @@
+import { Responses } from "../../../data/responses";
 import { Question } from "../data/questions";
-import { saveResponseUrl } from "../pages/assessment";
 
 function Select({
   question,
+  required = false,
   responses,
 }: {
   question: Question;
+  required?: boolean;
   responses: Record<string, string>;
 }) {
   return (
-    <>
-      <select
-        hx-post={saveResponseUrl}
-        hx-trigger="change"
-        class="select w-full max-w-xs select-bordered"
-        name="answerIdx"
-        hx-include={`next [name='questionId']`}
-      >
-        <option disabled selected>
-          Pick your favorite Simpson
+    <select
+      required={required}
+      class="select w-full max-w-xs select-bordered"
+      name={question.id}
+    >
+      <option disabled selected value="">
+        - Select -
+      </option>
+      {question.answers.map((answer, idx) => (
+        <option value={`${idx}`} selected={responses[question.id] === `${idx}`}>
+          {answer}
         </option>
-        {question.answers.map((answer, idx) => (
-          <option
-            value={`${idx}`}
-            selected={responses[question.id] === `${idx}`}
-          >
-            {answer}
-          </option>
-        ))}
-      </select>
-
-      <input type="hidden" name="questionId" value={question.id} />
-    </>
+      ))}
+    </select>
   );
 }
 
 function Radio({
   question,
   responses,
+  required = false,
 }: {
   question: Question;
   responses: Record<string, string>;
+  required?: boolean;
 }) {
   return (
     <ul class="space-y-4">
@@ -49,26 +44,11 @@ function Radio({
           <input
             id={answer}
             type="radio"
+            required={required}
             name={`${question.id}`}
             value={idx.toString()}
-            hx-post={saveResponseUrl}
-            hx-trigger="click"
-            hx-include={`[data-name='${question.id}-${idx}']`}
             checked={responses[question.id] === idx.toString()}
           />
-          <input
-            type="hidden"
-            name="answerIdx"
-            data-name={`${question.id}-${idx}`}
-            value={idx}
-          />
-          <input
-            data-name={`${question.id}-${idx}`}
-            type="hidden"
-            name="questionId"
-            value={question.id}
-          />
-
           <label for={answer}>{answer}</label>
         </li>
       ))}
@@ -79,9 +59,11 @@ function Radio({
 export function Question({
   question,
   responses,
+  required,
 }: {
   question: Question;
-  responses: Record<string, string>;
+  responses: Responses;
+  required?: boolean;
 }) {
   return (
     <div class="space-y-4">
@@ -90,11 +72,19 @@ export function Question({
       </h2>
 
       {question.type === "select" && (
-        <Select question={question} responses={responses} />
+        <Select
+          required={required}
+          question={question}
+          responses={responses.questions}
+        />
       )}
 
       {question.type === "radio" && (
-        <Radio question={question} responses={responses} />
+        <Radio
+          required={required}
+          question={question}
+          responses={responses.questions}
+        />
       )}
     </div>
   );

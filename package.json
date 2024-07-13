@@ -14,8 +14,12 @@
   },
   "dependencies": {
     "@libsql/client": "^0.7.0",
+    "@types/lodash": "^4.17.6",
     "drizzle-orm": "^0.32.0",
     "hono": "^4.4.12",
+    "i": "^0.3.7",
+    "lodash": "^4.17.21",
+    "npm": "^10.8.2",
     "typescript": "^5.5.3"
   },
   "devDependencies": {

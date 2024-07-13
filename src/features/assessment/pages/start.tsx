@@ -1,5 +1,6 @@
 import { getResponses, updateResponse } from "../../../data/responses";
 import { App } from "../../../server";
+import { Steps } from "../components/layout";
 
 export const updateInfoUrl = "/actions/update-info";
 
@@ -27,6 +28,8 @@ export function registerStartAssessment(app: App) {
     return c.render(
       <div className="container max-w-xl mx-auto">
         <div class="space-y-8">
+          <Steps current={0} />
+
           <h1 class="text-4xl">Let's Go</h1>
 
           <p>
@@ -114,7 +117,7 @@ export function registerStartAssessment(app: App) {
         </div>
       </div>,
       {
-        title: "Podcasr Assessment - Start",
+        title: "Podcast Assessment - Start",
       }
     );
   });

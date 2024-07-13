@@ -13,7 +13,7 @@ export type Responses = {
   questions: Record<string, string>;
 };
 
-export function getResponses(c: Context) {
+export function getResponses(c: Context): Responses {
   return JSON.parse(
     getCookie(c, RESPONSES_COOKIE_NAME) ??
       JSON.stringify({
@@ -37,6 +37,6 @@ export function saveResponse(
   { questionId, userAnswerIdx }: { questionId: string; userAnswerIdx: string }
 ) {
   const responses = getResponses(c);
-  responses[questionId] = userAnswerIdx;
+  responses.questions[questionId] = userAnswerIdx;
   setCookie(c, RESPONSES_COOKIE_NAME, JSON.stringify(responses));
 }

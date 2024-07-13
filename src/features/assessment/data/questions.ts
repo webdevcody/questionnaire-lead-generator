@@ -1,10 +1,12 @@
+export type Categories = "leadership" | "marketing" | "sales";
+
 export type Question = {
   id: string;
   question: string;
   answers: string[];
   type: "select" | "radio";
   section: "background" | "assessment";
-  cartegory: "background" | "leadership" | "marketing" | "sales";
+  category: "background" | Categories;
 };
 
 export const backgroundQuestions = [
@@ -13,28 +15,28 @@ export const backgroundQuestions = [
     type: "select",
     answers: ["Software Engineer", "Product Manager", "Other"],
     section: "background",
-    cartegory: "background",
+    category: "background",
   },
   {
     type: "select",
     question: "Which best describes you?",
     answers: ["Business consultant"],
     section: "background",
-    cartegory: "background",
+    category: "background",
   },
   {
     question: "Which best describes the area you work in or you business?",
     type: "radio",
     answers: ["Technology", "Education"],
     section: "background",
-    cartegory: "background",
+    category: "background",
   },
   {
     question: "What's your company's annual revenue?",
     type: "radio",
     answers: ["0", "$100"],
     section: "background",
-    cartegory: "background",
+    category: "background",
   },
   {
     type: "radio",
@@ -50,7 +52,7 @@ export const backgroundQuestions = [
       "10,001+",
     ],
     section: "background",
-    cartegory: "background",
+    category: "background",
   },
 ] as Question[];
 
@@ -60,28 +62,28 @@ export const assessmentQuestions = [
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "leadership",
+    category: "leadership",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "leadership",
+    category: "leadership",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "leadership",
+    category: "leadership",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "leadership",
+    category: "leadership",
   },
   // marketing questions
   {
@@ -89,28 +91,57 @@ export const assessmentQuestions = [
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "marketing",
+    category: "marketing",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "marketing",
+    category: "marketing",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "marketing",
+    category: "marketing",
   },
   {
     question: "How long have you been in your current role?",
     type: "radio",
     answers: ["1 year", "2 years", "10 years+"],
     section: "assessment",
-    cartegory: "marketing",
+    category: "marketing",
+  },
+  // sales
+  {
+    question: "How long have you been in your current role?",
+    type: "radio",
+    answers: ["1 year", "2 years", "10 years+"],
+    section: "assessment",
+    category: "sales",
+  },
+  {
+    question: "How long have you been in your current role?",
+    type: "radio",
+    answers: ["1 year", "2 years", "10 years+"],
+    section: "assessment",
+    category: "sales",
+  },
+  {
+    question: "How long have you been in your current role?",
+    type: "radio",
+    answers: ["1 year", "2 years", "10 years+"],
+    section: "assessment",
+    category: "sales",
+  },
+  {
+    question: "How long have you been in your current role?",
+    type: "radio",
+    answers: ["1 year", "2 years", "10 years+"],
+    section: "assessment",
+    category: "sales",
   },
 ] as Question[];
 
