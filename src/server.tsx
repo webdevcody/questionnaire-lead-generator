@@ -1,8 +1,11 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Layout } from "./layout";
-import { registerHome } from "./pages";
+import { Layout } from "./components/layout/layout";
+import { registerLanding } from "./features/landing";
+import { registerStartAssessment } from "./features/assessment/start-assessment";
+import { registerFinishAssessment } from "./features/assessment/finish-assessment";
+import { registerAssessmentApi } from "./features/assessment/api";
 
 declare module "hono" {
   interface ContextRenderer {
@@ -24,7 +27,14 @@ app.get(
   )
 );
 
-registerHome(app);
+const features = [
+  registerLanding,
+  registerStartAssessment,
+  registerFinishAssessment,
+  registerAssessmentApi,
+];
+
+features.forEach((register) => register(app));
 
 export type App = typeof app;
 
