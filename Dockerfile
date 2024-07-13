@@ -39,6 +39,9 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
+ARG RAILWAY_GIT_COMMIT_SHA
+ENV COMMIT_SHA=${RAILWAY_GIT_COMMIT_SHA}
+
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD [ "bun", "start" ]

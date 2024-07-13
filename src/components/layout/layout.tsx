@@ -22,7 +22,10 @@ export function Layout({
         {process.env.NODE_ENV !== "production" && (
           <script src="/static/livereload.js"></script>
         )}
-        <link href="/static/output.css" rel="stylesheet" />
+        <link
+          href={`/static/output.css?t=${process.env.COMMIT_SHA}`}
+          rel="stylesheet"
+        />
       </head>
       <body>
         <Header />
